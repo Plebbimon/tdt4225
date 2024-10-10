@@ -1,0 +1,10 @@
+# Dataset
+data/
+Data/
+
+# Mac OS
+.DS_Store
+
+# Python
+__pycache__/
+
