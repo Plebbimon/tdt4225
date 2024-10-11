@@ -1,6 +1,7 @@
 # Dataset
 data/
 Data/
+dataset/
 
 # Mac OS
 .DS_Store
