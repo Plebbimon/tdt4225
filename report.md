@@ -1,17 +1,10 @@
-
 <div align="center">
 
 # TDT4225 - Assignment 2
 
-</div>
-
-<div align="center">
-
-#### Group: XX
+#### Group: 91
 
 #### Author: Sebastian Småland
-
-</div>
 
 ## Introduction
 
@@ -60,6 +53,8 @@ So I decided to go for displaying the data using DBeaver as a visual crutch for 
 Data modeling wise, I've tried to map it as close as possible to the suggested format. Otherwise there's little to say in the way of the insertion script, as it's just a matter of reading the data and inserting it into the database. I've also added a few print statements to give some feedback on the progress of the script, although this might just create more confusion than it helps.
 
 Concerning memory, I'm pretty sure that I've not made unnessecary complexity when iterating to insert the data, but there's certainly room for improvement as to how the checks are made for the relation between labeled activities and the trackpoints which don't belong to any activity.
+
+Regarding the insertion of trackpoints, I've extracted (per file) relevant trackpoints in ranges from the start/end-point of an activity, and thus excluded them from the unlabeled activity which consist of the remaining trackpoints. I'm not sure whether this messes with my results.
 
 If the code still appears to be missing bulk inserts into the db, that is probably fixed in the most recent version found in the github repo.
 
@@ -495,3 +490,19 @@ The table shows the following results for (respectively) user_id and transportat
 |       179 | walk                            |
 
 Worth mentioning here that because I've sorted the transportation modes alphabetically, in tiebreakers bike will be chosen over bus, bus over car, etc.. So I've dealt with the adversity of having to choose between two equally good options by just being lazy.
+
+
+## Discussion
+
+I started out by trying to make pretty, atomic and modular functions for inserting data, and soon I realised that I would rather just implement a tangled mess and be done with it. If I were to improve on the code, refactoring every function would be my first task. I struggled for a while with the fact that the labeled activites are limited in scope with regards to time, such that they in reality encompass a rather small part of a `.plt` with trackpoints. Therefore, it felt wrong to me for the rest of the trackpoints to go into a single activity, when they with reason can be considered to be tens if not hundreds of activities in just one file. After some discussion with myself and and innocent bystander, I decided to just go with the flow and implement the logic as it was suggested in the assignment. This is probably the biggest issue I have with the code, as it feels like a hacky solution to a problem that could have been solved in a more elegant way.
+
+After this had thrown me off for a bit, I'd created something to make the insertion possible, if with no good guarantee that it is actually correct. The queries are also a bit of a mess, as I've not really thought about how to make them efficient, but rather just how to make them work in the first place. It's for the reader to decide if this is a good or bad thing, but I'm leaning towards the latter.
+
+Data cleaning wise, I've done almost nothing which I would consider to be major changes. I followed the structure in the exercise description closely, and that was that. I've also not done any type hinting or type safety, which is a bit of a no-no (I cringe just thinking about it), but I've not had any big struggles with the limited scope of the modelling and the data itself.
+
+I've learned that I should probably put more time into pre-planning and structuring my code for projects such as these, but alas I'm quick to jump in without a plan - I find it pleasing to first create a mess, and then tidy everything up.
+
+
+## Feedback
+
+I wish there was more info regarding task 2.8 (the one with the altitude meters), as I'm not sure if I've done it correctly. Also it would be nice to know if there is anything wrong with chucking all trackpoints into unlabeled activities where there are no corresponding activities. 

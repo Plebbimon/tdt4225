@@ -3,9 +3,12 @@ data/
 Data/
 dataset/
 
+
 # Mac OS
 .DS_Store
 
 # Python
 __pycache__/
 
+# random files
+*.docx
