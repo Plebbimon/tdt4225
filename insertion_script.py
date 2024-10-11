@@ -20,15 +20,6 @@ class InsertionProgram:
         self.cursor.execute(query % table_name)
         self.db_connection.commit()
 
-    def insert_data(self, table_name):
-        names = ['Bobby', 'Mc', 'McSmack', 'Board']
-        for name in names:
-            # Take note that the name is wrapped in '' --> '%s' because it is a string,
-            # while an int would be %s etc
-            query = "INSERT INTO %s (name) VALUES ('%s')"
-            self.cursor.execute(query % (table_name, name))
-        self.db_connection.commit()
-
     def create_table_user(self, table_name):
         """Creates a table for the user entity class"""
         query = """CREATE TABLE IF NOT EXISTS %s (
