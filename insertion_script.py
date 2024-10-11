@@ -234,7 +234,7 @@ class InsertionProgram:
                         extracted_trackpoints, trackpoints = self.extract_trackpoints_period(
                             trackpoints, match[0][4], match[1][4], activity_id=activity[0])
                         self.insert_trackpoints(extracted_trackpoints)
-                # create a new activity with the remaining trackpoints
+                # The remaining trackpoints get binned into a new activity
                 if len(trackpoints) > 0:
                     print("Creating new activity for remaining trackpoints")
                     self.insert_activity(user_id, transportation_mode="Unknown", start_date_time=trackpoints[0][4],
@@ -309,12 +309,6 @@ def main():
         else:
             print("Invalid input. Program halted.")
 
-        # program.check_all_activities_for_user("010")
-        # program.check_all_trackpoints_for_activity(14799)
-        # program.load_and_insert_trackpoints("010")
-
-        # Uncomment below to initialize the database with all users and their activities if they have labels
-        # program.load_all_users()
     except Exception as e:
         print("ERROR: Failed to use database:", e)
     finally:
